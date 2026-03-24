@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBayData — AI Training Data for the Agentic Era</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B2A;
+  --dark: #1B2838;
+  --slate: #334155;
+  --mid: #64748B;
+  --light: #94A3B8;
+  --border: #E2E8F0;
+  --bg: #F8FAFC;
+  --white: #FFFFFF;
+  --teal: #0D9488;
+  --teal-light: #14B8A6;
+  --teal-bg: #F0FDFA;
+  --teal-border: #99F6E4;
+  --amber: #F59E0B;
+  --amber-bg: #FFFBEB;
+  --blue: #3B82F6;
+  --blue-bg: #EFF6FF;
+  --purple: #8B5CF6;
+  --purple-bg: #F5F3FF;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--bg); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(13,27,42,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 0 2rem; }
+nav .inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+nav .logo { font-family: 'DM Sans', sans-serif; color: white; font-size: 1.15rem; font-weight: 700; letter-spacing: -0.5px; }
+nav .logo em { font-style: normal; color: var(--teal-light); }
+nav .links { display: flex; gap: 0.25rem; }
+nav .links a { color: var(--light); text-decoration: none; font-size: 0.8rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 500; transition: all 0.15s; }
+nav .links a:hover { color: white; background: rgba(255,255,255,0.08); }
+nav .cta-btn { padding: 0.4rem 1rem; background: var(--teal); color: white; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: background 0.15s; }
+nav .cta-btn:hover { background: var(--teal-light); }
+
+/* HERO */
+.hero { background: var(--navy); padding: 6rem 2rem 5rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -40%; right: -15%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(13,148,136,0.12) 0%, transparent 70%); border-radius: 50%; }
+.hero::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%); border-radius: 50%; }
+.hero .inner { max-width: 1200px; margin: 0 auto; position: relative; text-align: center; }
+.hero h1 { font-family: 'DM Serif Display', serif; font-size: 3.5rem; color: white; line-height: 1.12; max-width: 800px; margin: 0 auto 1.25rem; }
+.hero h1 em { font-style: normal; color: var(--teal-light); }
+.hero .sub { color: var(--light); font-size: 1.15rem; max-width: 620px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.hero .hero-ctas { display: flex; gap: 1rem; justify-content: center; margin-bottom: 3.5rem; }
+.hero .hero-ctas a { padding: 0.75rem 2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: all 0.15s; }
+.hero .btn-primary { background: var(--teal); color: white; }
+.hero .btn-primary:hover { background: var(--teal-light); }
+.hero .btn-secondary { background: rgba(255,255,255,0.08); color: white; border: 1px solid rgba(255,255,255,0.15); }
+.hero .btn-secondary:hover { background: rgba(255,255,255,0.12); }
+.hero .metrics { display: flex; justify-content: center; gap: 4rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.06); }
+.hero .metric .num { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--teal-light); }
+.hero .metric .label { color: var(--light); font-size: 0.82rem; margin-top: 0.2rem; }
+
+/* SECTIONS */
+section { padding: 5rem 2rem; }
+section .inner { max-width: 1200px; margin: 0 auto; }
+.section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
+.section-title { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--navy); margin-bottom: 0.5rem; }
+.section-desc { color: var(--mid); font-size: 0.95rem; max-width: 650px; margin-bottom: 2.5rem; line-height: 1.7; }
+.section-center { text-align: center; }
+.section-center .section-desc { margin-left: auto; margin-right: auto; }
+
+/* VERTICALS */
+#verticals { background: var(--white); border-top: 1px solid var(--border); }
+.verticals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.v-card { padding: 2rem; border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s; position: relative; background: var(--white); }
+.v-card:hover { border-color: var(--teal-border); box-shadow: 0 4px 24px rgba(13,148,136,0.06); transform: translateY(-2px); }
+.v-card .v-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.v-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.v-card p { color: var(--mid); font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem; }
+.v-card .v-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.v-card .v-tag { font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 500; background: var(--bg); color: var(--slate); border: 1px solid var(--border); }
+
+/* METHODOLOGY */
+#method { background: var(--navy); color: white; }
+#method .section-label { color: var(--teal-light); }
+#method .section-title { color: white; }
+#method .section-desc { color: var(--light); }
+.method-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.method-step { padding: 2rem 1.5rem; border-right: 1px solid rgba(255,255,255,0.06); position: relative; }
+.method-step:last-child { border-right: none; }
+.method-step .step-num { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--teal-light); opacity: 0.3; margin-bottom: 0.25rem; }
+.method-step h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.method-step p { font-size: 0.82rem; color: var(--light); line-height: 1.6; }
+
+/* DIFFERENTIATORS */
+#diff { background: var(--bg); }
+.diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.diff-card { display: flex; gap: 1.25rem; padding: 1.75rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; }
+.diff-card .diff-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+.diff-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; }
+.diff-card p { color: var(--mid); font-size: 0.83rem; line-height: 1.6; }
+
+/* PROOF */
+#proof { background: var(--white); border-top: 1px solid var(--border); }
+.proof-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.proof-card { padding: 2rem; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; }
+.proof-card .proof-stat { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--teal); margin-bottom: 0.25rem; }
+.proof-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+.proof-card p { color: var(--mid); font-size: 0.82rem; line-height: 1.6; }
+
+/* CAPABILITIES */
+#capabilities { background: var(--bg); }
+.cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.25rem; }
+.cap-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; transition: all 0.2s; }
+.cap-card:hover { border-color: var(--teal-border); box-shadow: 0 4px 20px rgba(13,148,136,0.06); transform: translateY(-2px); }
+.cap-card .icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem; }
+.cap-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.cap-card p { color: var(--mid); font-size: 0.83rem; line-height: 1.6; margin-bottom: 1rem; }
+.cap-card .detail-list { list-style: none; }
+.cap-card .detail-list li { font-size: 0.8rem; color: var(--slate); padding: 0.25rem 0 0.25rem 1.2rem; position: relative; }
+.cap-card .detail-list li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+
+/* CUSTOM */
+#custom { background: var(--white); border-top: 1px solid var(--border); }
+.custom-highlight { background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%); border-radius: 16px; padding: 3.5rem; color: white; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.custom-highlight h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; margin-bottom: 1rem; }
+.custom-highlight h2 em { font-style: normal; color: var(--teal-light); }
+.custom-highlight > div:first-child p { color: var(--light); line-height: 1.7; font-size: 0.92rem; }
+.custom-steps { list-style: none; }
+.custom-steps li { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; gap: 0.75rem; align-items: flex-start; }
+.custom-steps li:last-child { border: none; }
+.custom-steps .step-icon { width: 28px; height: 28px; border-radius: 8px; background: rgba(13,148,136,0.2); color: var(--teal-light); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
+.custom-steps .step-text h4 { font-size: 0.9rem; margin-bottom: 0.15rem; }
+.custom-steps .step-text p { font-size: 0.8rem; color: var(--light); }
+
+/* ABOUT */
+#about { background: var(--bg); border-top: 1px solid var(--border); }
+
+/* FOOTER */
+footer { background: var(--navy); color: var(--light); padding: 2.5rem 2rem; text-align: center; font-size: 0.85rem; }
+footer strong { color: white; }
+
+/* TAGS */
+.tag { display: inline-block; padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.72rem; font-weight: 600; }
+.tag-teal { background: var(--teal-bg); color: var(--teal); border: 1px solid var(--teal-border); }
+.tag-amber { background: var(--amber-bg); color: #B45309; border: 1px solid var(--amber-border); }
+.tag-blue { background: var(--blue-bg); color: #2563EB; border: 1px solid #BFDBFE; }
+.tag-purple { background: var(--purple-bg); color: #7C3AED; border: 1px solid #DDD6FE; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.2rem; }
+  .hero .metrics { flex-wrap: wrap; gap: 2rem; }
+  .hero .hero-ctas { flex-direction: column; align-items: center; }
+  .verticals-grid { grid-template-columns: 1fr; }
+  .method-grid { grid-template-columns: 1fr 1fr; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .proof-cards { grid-template-columns: 1fr; }
+  [style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr 1fr !important; }
+  [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+  .cap-grid { grid-template-columns: 1fr; }
+  .custom-highlight { grid-template-columns: 1fr; }
+  #about div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+  nav .links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <div class="logo">o<em>bay</em>data</div>
+    <div class="links">
+      <a href="#verticals">Verticals</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#method">How We Work</a>
+      <a href="#custom">Custom Data</a>
+      <a href="#about">About</a>
+    </div>
+    <a href="#about" class="cta-btn">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="inner">
+    <h1>The data behind <em>intelligence</em> that acts</h1>
+    <p class="sub">We produce high-quality training data for agentic AI, embodied robotics, and foundation models — from real environments, with human expertise, at production scale.</p>
+    <div class="hero-ctas">
+      <a href="#verticals" class="btn-primary">Explore Our Data</a>
+      <a href="https://huggingface.co/obaydata" target="_blank" class="btn-secondary">Browse Samples on HuggingFace</a>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="num">50+</div><div class="label">Dataset Products</div></div>
+      <div class="metric"><div class="num">200+</div><div class="label">Domain Experts on Demand</div></div>
+      <div class="metric"><div class="num">30+</div><div class="label">University Partnerships</div></div>
+      <div class="metric"><div class="num">8</div><div class="label">Languages in Production</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div style="background: var(--white); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+    <div style="color: var(--light); font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;">Trusted by teams building with</div>
+    <div style="display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap;">
+      <span style="font-weight: 700; color: var(--mid); font-size: 0.9rem; letter-spacing: 0.5px;">NVIDIA NeMo</span>
+      <span style="font-weight: 700; color: var(--mid); font-size: 0.9rem; letter-spacing: 0.5px;">HuggingFace</span>
+      <span style="font-weight: 700; color: var(--mid); font-size: 0.9rem; letter-spacing: 0.5px;">Terminal-Bench</span>
+      <span style="font-weight: 700; color: var(--mid); font-size: 0.9rem; letter-spacing: 0.5px;">LeRobot</span>
+      <span style="font-weight: 700; color: var(--mid); font-size: 0.9rem; letter-spacing: 0.5px;">GR00T</span>
+    </div>
+  </div>
+</div>
+
+<!-- VERTICALS -->
+<section id="verticals">
+  <div class="inner">
+    <div class="section-center">
+      <div class="section-label">What We Build</div>
+      <div class="section-title">Data for every stage of the AI stack</div>
+      <div class="section-desc">From pre-training corpora to post-training alignment, from digital agents to physical robots — we cover the full spectrum of modern AI data needs.</div>
+    </div>
+    <div class="verticals-grid">
+      <div class="v-card">
+        <div class="v-icon">🦾</div>
+        <h3>Embodied AI & Physical AI</h3>
+        <p>Egocentric video demonstrations, UMI gripper data, teleoperation recordings, hand pose + SLAM trajectories. Real humans in real environments — hotels, factories, kitchens, warehouses.</p>
+        <div class="v-tags">
+          <span class="v-tag">Egocentric Video</span>
+          <span class="v-tag">UMI / Teleop</span>
+          <span class="v-tag">Hand Pose</span>
+          <span class="v-tag">SLAM</span>
+          <span class="v-tag">LeRobot Format</span>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-icon">🤖</div>
+        <h3>Agentic Trajectories</h3>
+        <p>Complete observe-think-act decision traces from AI agents solving real tasks in Docker-isolated terminals. Multi-step, auto-verified, SFT-ready.</p>
+        <div class="v-tags">
+          <span class="v-tag">Terminal Agents</span>
+          <span class="v-tag">Browser Agents</span>
+          <span class="v-tag">RL Environments</span>
+          <span class="v-tag">pytest Verified</span>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-icon">🎮</div>
+        <h3>World Models</h3>
+        <p>High-fidelity gameplay recordings with frame-aligned inputs, cinematographic footage, and dynamic video corpora. Fuel for video generation and world simulation models.</p>
+        <div class="v-tags">
+          <span class="v-tag">AAA Gameplay</span>
+          <span class="v-tag">60fps + Keylog</span>
+          <span class="v-tag">Cinematographic</span>
+          <span class="v-tag">HUD-free</span>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-icon">📊</div>
+        <h3>Eval & Benchmarks</h3>
+        <p>Expert-designed evaluation suites: agent skill testing, GPU kernel benchmarks, multimodal science exams, structured image QA, engineering drawing analysis.</p>
+        <div class="v-tags">
+          <span class="v-tag">Agent Skills</span>
+          <span class="v-tag">KernelBench</span>
+          <span class="v-tag">Multimodal Science</span>
+          <span class="v-tag">Rubric Scoring</span>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-icon">💻</div>
+        <h3>Code & Visual Generation</h3>
+        <p>Structured prompt → code → rendered output triples with rubric evaluation. SVG, CSS animations, 3D scenes, interactive apps. Multi-dimensional quality scoring.</p>
+        <div class="v-tags">
+          <span class="v-tag">SVG / HTML / CSS</span>
+          <span class="v-tag">3D Animations</span>
+          <span class="v-tag">Rubric Scored</span>
+          <span class="v-tag">500+ Pairs</span>
+        </div>
+      </div>
+      <div class="v-card">
+        <div class="v-icon">📚</div>
+        <h3>STEM, Multilingual & Domain</h3>
+        <p>Math/science problems with CoT solutions, K12 across 5+ languages, financial agent data, medical records, traditional medicine databases, SFT corpora in Southeast Asian languages.</p>
+        <div class="v-tags">
+          <span class="v-tag">EN / ZH / ID / VI / MS</span>
+          <span class="v-tag">STEM</span>
+          <span class="v-tag">Finance</span>
+          <span class="v-tag">Medical</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section id="method">
+  <div class="inner">
+    <div class="section-center">
+      <div class="section-label">How We Work</div>
+      <div class="section-title">From specification to delivery</div>
+      <div class="section-desc">We don't resell public datasets. Every data product is built from scratch through a rigorous, repeatable pipeline designed for model-moving quality.</div>
+    </div>
+    <div class="method-grid">
+      <div class="method-step">
+        <div class="step-num">01</div>
+        <h4>Co-Design</h4>
+        <p>We work with your ML team to define task specifications, annotation schemas, quality rubrics, and acceptance criteria — aligned to your model architecture and training loop.</p>
+      </div>
+      <div class="method-step">
+        <div class="step-num">02</div>
+        <h4>Collect</h4>
+        <p>Domain experts and trained operators collect data in real environments — factory floors, hotel rooms, kitchens, Docker terminals — not synthetic simulations.</p>
+      </div>
+      <div class="method-step">
+        <div class="step-num">03</div>
+        <h4>Validate</h4>
+        <p>Automated QA (pytest, rendering checks, format validators) plus human expert review. Only data that passes both layers ships. Correction data available on request.</p>
+      </div>
+      <div class="method-step">
+        <div class="step-num">04</div>
+        <h4>Deliver</h4>
+        <p>Your native format — Zarr, Parquet, Chat JSON, HuggingFace datasets, LeRobot, RLDS. S3-compatible API, bulk export, or custom integration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section id="diff">
+  <div class="inner">
+    <div class="section-label">Why OBayData</div>
+    <div class="section-title">Built different</div>
+    <div class="section-desc">Most data companies sell you labels. We build you pipelines.</div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon" style="background: var(--teal-bg); color: var(--teal);">🏭</div>
+        <div>
+          <h4>Real environments, not simulated ones</h4>
+          <p>Our operators work in actual hotels, factories, warehouses, and kitchens. The data captures real-world physics, lighting, occlusion, and human variability that simulation can't replicate.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon" style="background: var(--blue-bg); color: var(--blue);">🔬</div>
+        <div>
+          <h4>Rubric-driven quality, not crowd consensus</h4>
+          <p>Every dataset ships with explicit quality rubrics and automated verification. No crowd voting. No ambiguous majority labels. Deterministic, reproducible quality metrics.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon" style="background: var(--amber-bg); color: var(--amber);">🌏</div>
+        <div>
+          <h4>Asia-Pacific execution, global delivery</h4>
+          <p>Hong Kong HQ with deep operations in Mainland China and US entity (Isotope LLC). We bridge China's data execution capability with Western client standards and compliance.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon" style="background: var(--purple-bg); color: var(--purple);">🧩</div>
+        <div>
+          <h4>Format-native, not format-converted</h4>
+          <p>We build data in your training format from day one — not collect in one format and convert later. LeRobot, GR00T, OpenAI Chat, Terminal-Bench, HuggingFace — all first-class.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section id="proof">
+  <div class="inner">
+    <div class="section-center">
+      <div class="section-label">By The Numbers</div>
+      <div class="section-title">Proven at scale</div>
+    </div>
+    <div class="proof-cards">
+      <div class="proof-card">
+        <div class="proof-stat">1,000+</div>
+        <h4>Agent tasks designed & verified</h4>
+        <p>Terminal-Bench standard tasks across 6 domains — algorithms, ML engineering, debugging, system admin, Git, data ops — each with Dockerfile, pytest, and auto-grading.</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-stat">40+</div>
+        <h4>Real-world scenes captured</h4>
+        <p>Egocentric demonstrations across hospitality, logistics, manufacturing, and custom SOP environments. Multi-camera, multi-annotation, production-validated pipelines.</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-stat">8</div>
+        <h4>Languages in production</h4>
+        <p>English, Chinese, Indonesian, Vietnamese, Malay, and more. K12 curricula, SFT corpora, TTS voice libraries — each built to local education and linguistic standards.</p>
+      </div>
+    </div>
+    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+      <a href="https://huggingface.co/obaydata" target="_blank" style="padding: 1rem 1.5rem; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); text-decoration: none; display: flex; align-items: center; gap: 0.75rem; transition: border 0.15s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+        <span style="font-size: 1.3rem;">🤗</span>
+        <div>
+          <div style="font-weight: 700; color: var(--navy); font-size: 0.88rem;">Browse demo datasets on HuggingFace</div>
+          <div style="color: var(--mid); font-size: 0.78rem;">huggingface.co/obaydata</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERT NETWORK -->
+<section style="background: var(--bg); border-top: 1px solid var(--border); padding: 5rem 2rem;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-center">
+      <div class="section-label">Expert Network</div>
+      <div class="section-title">Built by specialists, not crowd workers</div>
+      <div class="section-desc">Our data is produced by vetted domain experts across academia and industry — not anonymous crowdsourcing platforms. Every dataset reflects deep domain knowledge.</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2.5rem;">
+      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
+        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎓</div>
+        <div style="font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--teal);">30+</div>
+        <div style="font-size: 0.82rem; color: var(--mid); margin-bottom: 0.5rem;">University partners</div>
+        <div style="font-size: 0.75rem; color: var(--slate); line-height: 1.5;">CS, robotics, medical, finance, and linguistics departments across China, Hong Kong, and Southeast Asia</div>
+      </div>
+      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
+        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔬</div>
+        <div style="font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--teal);">200+</div>
+        <div style="font-size: 0.82rem; color: var(--mid); margin-bottom: 0.5rem;">Domain experts on demand</div>
+        <div style="font-size: 0.75rem; color: var(--slate); line-height: 1.5;">Robotics engineers, ML researchers, physicians, financial analysts, linguists, and SWE professionals</div>
+      </div>
+      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
+        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏭</div>
+        <div style="font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--teal);">15+</div>
+        <div style="font-size: 0.82rem; color: var(--mid); margin-bottom: 0.5rem;">Industry verticals</div>
+        <div style="font-size: 0.75rem; color: var(--slate); line-height: 1.5;">Robotics, healthcare, finance, manufacturing, logistics, education, telecom, legal, and more</div>
+      </div>
+      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
+        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✅</div>
+        <div style="font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--teal);">100%</div>
+        <div style="font-size: 0.82rem; color: var(--mid); margin-bottom: 0.5rem;">Expert-reviewed output</div>
+        <div style="font-size: 0.75rem; color: var(--slate); line-height: 1.5;">Every dataset goes through domain expert review before delivery — no auto-approved crowd output</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem;">
+        <div style="font-weight: 700; font-size: 0.85rem; color: var(--navy); margin-bottom: 0.4rem;">Robotics & Embodied AI</div>
+        <div style="font-size: 0.78rem; color: var(--mid); line-height: 1.6;">Mechanical engineers, computer vision researchers, manipulation specialists. Trained on UMI, teleop, and egocentric capture protocols.</div>
+      </div>
+      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem;">
+        <div style="font-weight: 700; font-size: 0.85rem; color: var(--navy); margin-bottom: 0.4rem;">Software Engineering & Agents</div>
+        <div style="font-size: 0.78rem; color: var(--mid); line-height: 1.6;">Senior SWEs with production experience in debugging, ML ops, system admin. Design and verify Terminal-Bench tasks.</div>
+      </div>
+      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem;">
+        <div style="font-weight: 700; font-size: 0.85rem; color: var(--navy); margin-bottom: 0.4rem;">Medical, Finance & STEM</div>
+        <div style="font-size: 0.78rem; color: var(--mid); line-height: 1.6;">Licensed physicians, CFA holders, PhD-level scientists. Produce and validate domain-specific datasets with expert-grade accuracy.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST & COMPLIANCE -->
+<section style="background: var(--navy); padding: 4rem 2rem;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-center">
+      <div class="section-label" style="color: var(--teal-light);">Trust & Compliance</div>
+      <div class="section-title" style="color: white;">Enterprise-ready data operations</div>
+      <div class="section-desc" style="color: var(--light); margin-left: auto; margin-right: auto;">We operate with the governance, security, and legal infrastructure that US enterprise clients require.</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem;">
+        <div style="font-size: 1.3rem; margin-bottom: 0.5rem;">🏛️</div>
+        <div style="font-weight: 700; font-size: 0.88rem; color: white; margin-bottom: 0.35rem;">US Legal Entity</div>
+        <div style="font-size: 0.78rem; color: var(--light); line-height: 1.6;">Isotope LLC registered in the United States. Contracts, invoicing, and IP assignment under US law.</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem;">
+        <div style="font-size: 1.3rem; margin-bottom: 0.5rem;">🔒</div>
+        <div style="font-weight: 700; font-size: 0.88rem; color: white; margin-bottom: 0.35rem;">Data Security</div>
+        <div style="font-size: 0.78rem; color: var(--light); line-height: 1.6;">PII redaction, access-controlled storage, encrypted transfer. NDA-protected workflows standard on all projects.</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem;">
+        <div style="font-size: 1.3rem; margin-bottom: 0.5rem;">📋</div>
+        <div style="font-weight: 700; font-size: 0.88rem; color: white; margin-bottom: 0.35rem;">IP Clean & Licensed</div>
+        <div style="font-size: 0.78rem; color: var(--light); line-height: 1.6;">All data produced under work-for-hire or licensed agreements. Full IP transfer to client. No open-source contamination.</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem;">
+        <div style="font-size: 1.3rem; margin-bottom: 0.5rem;">🌐</div>
+        <div style="font-weight: 700; font-size: 0.88rem; color: white; margin-bottom: 0.35rem;">Cross-Border Compliant</div>
+        <div style="font-size: 0.78rem; color: var(--light); line-height: 1.6;">HK entity bridges US clients with APAC operations. Data handling compliant with GDPR principles and US export regulations.</div>
+      </div>
+    </div>
+    <div style="margin-top: 2rem; text-align: center; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--light); font-size: 0.78rem;">
+        <span style="color: var(--teal-light);">✓</span> SOC 2 Type II aligned practices
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--light); font-size: 0.78rem;">
+        <span style="color: var(--teal-light);">✓</span> Standard MSA & DPA available
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--light); font-size: 0.78rem;">
+        <span style="color: var(--teal-light);">✓</span> S3-compatible secure delivery
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--light); font-size: 0.78rem;">
+        <span style="color: var(--teal-light);">✓</span> Audit trail on all annotations
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="inner">
+    <div class="section-label">Capabilities</div>
+    <div class="section-title">Deep expertise across modalities</div>
+    <div class="section-desc">Every vertical is backed by production infrastructure, domain specialists, and proven delivery.</div>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="icon" style="background: var(--teal-bg); color: var(--teal);">👁️</div>
+        <h3>Egocentric Video Data</h3>
+        <p>Wearable multi-camera capture (head + dual wrist) with optional Manus haptic gloves. Real human demonstrations in real environments.</p>
+        <ul class="detail-list">
+          <li>1080p video: head + 2× wrist perspectives</li>
+          <li>Hand pose reconstruction (world & camera coords)</li>
+          <li>SLAM camera trajectory estimation</li>
+          <li>Atomic skill annotations with frame timestamps</li>
+          <li>Correction data and speed-controlled capture</li>
+        </ul>
+      </div>
+      <div class="cap-card">
+        <div class="icon" style="background: var(--blue-bg); color: var(--blue);">🤖</div>
+        <h3>Embodied AI Data (UMI & Teleop)</h3>
+        <p>Multi-modality robotic data: handheld UMI grippers, VR/exoskeleton teleoperation, multi-view RGB-D, force/tactile sensing.</p>
+        <ul class="detail-list">
+          <li>UMI: wrist-view + 6-DoF gripper, no robot required</li>
+          <li>Teleop: joint angles, end-effector, contact dynamics</li>
+          <li>Format: MCap, RLDS, HDF5, Zarr — LeRobot compatible</li>
+          <li>Sub-200ms latency, millisecond sensor sync</li>
+        </ul>
+      </div>
+      <div class="cap-card">
+        <div class="icon" style="background: #FEF3C7; color: #D97706;">🛤️</div>
+        <h3>Agentic Trajectories</h3>
+        <p>Complete observe-think-act traces in real Docker-isolated terminals. Ideal for SFT of coding and agentic models.</p>
+        <ul class="detail-list">
+          <li>Terminal-Bench standard: Dockerfile + task.yaml + pytest</li>
+          <li>Real execution: every command runs in a live container</li>
+          <li>Structured JSON: state_analysis → explanation → commands</li>
+          <li>Domains: algorithms, ML, debug, Git, sysadmin, data ops</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOM -->
+<section id="custom">
+  <div class="inner">
+    <div class="custom-highlight">
+      <div>
+        <div class="section-label" style="color: var(--teal-light);">Our Core Offering</div>
+        <h2>We don't just sell datasets.<br>We build <em>your</em> data.</h2>
+        <p>Every model has unique data needs. We co-design collection SOPs, annotation schemas, and QA rubrics with your team — then execute at scale in real environments. From pilot batch to production volume, we iterate until the data moves your metrics.</p>
+      </div>
+      <div>
+        <ul class="custom-steps">
+          <li><div class="step-icon">1</div><div class="step-text"><h4>Co-Design</h4><p>Define tasks, schemas, and quality rubrics with your ML team</p></div></li>
+          <li><div class="step-icon">2</div><div class="step-text"><h4>Pilot Batch</h4><p>Small-scale production for validation and iteration</p></div></li>
+          <li><div class="step-icon">3</div><div class="step-text"><h4>Review & Adjust</h4><p>Refine SOP based on your model's feedback signals</p></div></li>
+          <li><div class="step-icon">4</div><div class="step-text"><h4>Scale Production</h4><p>Full deployment with automated QA and continuous delivery</p></div></li>
+          <li><div class="step-icon">5</div><div class="step-text"><h4>Format & Deliver</h4><p>Zarr, Parquet, Chat JSON, HuggingFace — your native format</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="section-label">About Us</div>
+    <div class="section-title">New Oriental Bay Ltd.</div>
+    <div style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--navy); line-height: 1.4; margin: 1.5rem 0 2rem; max-width: 700px;">
+      Real data from real environments.<br>
+      <span style="color: var(--teal);">Because intelligence is learned, not generated.</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem;">
+      <div>
+        <p style="color: var(--slate); font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.25rem;">
+          New Oriental Bay is a full-stack AI training data company built to serve the next generation of intelligent systems — from large language models and agentic AI to embodied robotics and reinforcement learning environments. We believe the quality ceiling of any AI system is set by its training data, and we exist to raise that ceiling.
+        </p>
+        <p style="color: var(--slate); font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.25rem;">
+          From our Hong Kong headquarters, we coordinate data operations across Mainland China and the US, combining deep local execution capability with global delivery standards. Our teams include domain experts in robotics, software engineering, medical science, finance, and education — ensuring every dataset reflects real-world complexity, not synthetic shortcuts.
+        </p>
+        <p style="color: var(--slate); font-size: 0.92rem; line-height: 1.8;">
+          Whether you need egocentric human demonstrations captured on factory floors, agent trajectories recorded in live Docker terminals, RL environment interaction logs, or multi-language STEM problem sets verified by subject-matter experts — we design, collect, annotate, validate, and deliver. Customization is not an add-on. It's how we work.
+        </p>
+      </div>
+      <div style="background: var(--navy); border-radius: 12px; padding: 2rem; color: white; align-self: start;">
+        <div style="font-weight: 700; font-size: 1rem; margin-bottom: 1.25rem;">Contact</div>
+        <div style="font-size: 0.85rem; line-height: 2.2;">
+          <div><span style="color: var(--light); display: inline-block; width: 55px;">Email</span> <a href="mailto:simon.su@obaydata.com" style="color: var(--teal-light); text-decoration: none;">simon.su@obaydata.com</a></div>
+          <div><span style="color: var(--light); display: inline-block; width: 55px;">Office</span> <span style="color: #E2E8F0;">Rm 13/F, Hollywood Plaza, Nathan Road, Mong Kok, Hong Kong</span></div>
+          <div><span style="color: var(--light); display: inline-block; width: 55px;">Web</span> <span style="color: var(--teal-light);">obaydata.com</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>New Oriental Bay Ltd.</strong> · Mong Kok, Hong Kong<br>
+  <span style="font-size: 0.8rem; opacity: 0.6;">Real data from real environments. · 2026</span>
+</footer>
+
+</body>
+</html>
